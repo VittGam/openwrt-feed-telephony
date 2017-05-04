@@ -30,7 +30,7 @@ endef
 
 define Package/dahdi-cfg
   $(call Package/dahdi-cfg/Default)
-  DEPENDS+=+libpthread
+  DEPENDS+=+libpthread +dahdi-tools-libtonezone
   TITLE:=DAHDI tools dahdi_cfg, dahdi_scan and fxotune
 endef
 
@@ -89,7 +89,8 @@ endef
 define Package/dahdi-tools-libtonezone/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_BUILD_DIR)/.libs/libtonezone.so.2.0.0 $(1)/usr/lib/
-	cd $(1)/usr/lib/; ln -s libtonezone.so.2.0.0 libtonezone.so; ln -s libtonezone.so.2.0.0 libtonezone.so.2
+	ln -s libtonezone.so.2.0.0 $(1)/usr/lib/libtonezone.so
+	ln -s libtonezone.so.2.0.0 $(1)/usr/lib/libtonezone.so.2
 endef
 
 $(eval $(call BuildPackage,dahdi-cfg))
